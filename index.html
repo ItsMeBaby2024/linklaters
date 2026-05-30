@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Linklaters · 50 Years in Hong Kong · Cocktail Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="stage" id="stage" data-view="landing">
+    <!-- Soft paper texture + magenta accent layers -->
+    <div class="paper" aria-hidden="true"></div>
+    <div class="accent accent-tl" aria-hidden="true"></div>
+    <div class="accent accent-br" aria-hidden="true"></div>
+    <svg class="ribbon" viewBox="0 0 100 600" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="rb" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FD3DB5" stop-opacity="0"/>
+          <stop offset="50%" stop-color="#FD3DB5" stop-opacity="1"/>
+          <stop offset="100%" stop-color="#C81C8C" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <rect x="48" y="0" width="2" height="600" fill="url(#rb)"/>
+    </svg>
+
+    <header class="brand-header" id="brandHeader">
+      <img class="brand-logo" src="./assets/logohighres_new.png" alt="Linklaters 50 Years in Hong Kong" />
+    </header>
+
+    <section class="page" id="page"><!-- content injected by JS --></section>
+
+    <footer class="page-footer" id="pageFooter" hidden>
+      <div class="progress" id="progress"></div>
+      <button class="back" id="backBtn" type="button">
+        <span aria-hidden="true">←</span>&nbsp;Back
+      </button>
+    </footer>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
