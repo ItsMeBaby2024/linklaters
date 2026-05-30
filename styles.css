@@ -43,27 +43,37 @@ html, body {
   text-rendering: optimizeLegibility;
 }
 
-/* ===== Stage (vertical event canvas) ===== */
+/* ===== Stage (vertical event canvas) =====
+   Portrait viewports (phones, tablets, 1080×1920 kiosks) fill the viewport.
+   Landscape viewports (desktop preview) show a centered portrait card.
+   container-type lets all interior sizing scale with the stage via `cqi`. */
 .stage {
   position: relative;
   width: 100vw;
+  height: 100vh;
+  height: 100dvh;
   min-height: 100vh;
-  max-width: 560px;
+  min-height: 100dvh;
   margin: 0 auto;
   overflow: hidden;
   isolation: isolate;
   display: flex;
   flex-direction: column;
   background: var(--cream);
+  container-type: inline-size;
+  container-name: stage;
 }
-@media (min-width: 600px) {
+
+/* Landscape viewport → centered portrait card */
+@media (min-aspect-ratio: 1/1) {
   .stage {
+    width: auto;
+    height: min(98vh, 1180px);
     aspect-ratio: 9 / 19.5;
+    max-width: 560px;
     min-height: auto;
-    height: min(98vh, calc(100vw * 19.5 / 9));
-    max-width: min(560px, calc(98vh * 9 / 19.5));
     box-shadow: 0 40px 100px rgba(31, 20, 25, 0.25);
-    margin-block: clamp(0px, 1vh, 14px);
+    margin-block: 1vh;
     border-radius: 4px;
   }
 }
@@ -123,14 +133,14 @@ html, body {
   position: relative;
   z-index: 3;
   flex-shrink: 0;
-  padding: clamp(10px, 2vw, 18px) clamp(14px, 4vw, 24px) 0;
+  padding: clamp(10px, 2cqi, 28px) clamp(14px, 4cqi, 48px) 0;
   display: flex;
   justify-content: center;
   pointer-events: none;
   transition: padding 0.35s ease;
 }
 .brand-logo {
-  width: clamp(220px, 60vw, 320px);
+  width: clamp(220px, 60cqi, 600px);
   height: auto;
   user-select: none;
   -webkit-user-drag: none;
@@ -140,21 +150,21 @@ html, body {
 /* Landing: centered, sitting close to the title */
 .stage[data-view="landing"] .brand-header {
   justify-content: center;
-  padding: clamp(8px, 2vw, 16px) 0 0;
+  padding: clamp(8px, 2cqi, 24px) 0 0;
 }
 .stage[data-view="landing"] .brand-logo {
-  width: clamp(127px, 34vw, 186px);
+  width: clamp(127px, 34cqi, 340px);
 }
 
 /* Quiz + Result: small, centered at the top */
 .stage[data-view="question"] .brand-header,
 .stage[data-view="result"]   .brand-header {
   justify-content: center;
-  padding: clamp(8px, 2vw, 14px) clamp(14px, 4vw, 22px) 0;
+  padding: clamp(8px, 2cqi, 22px) clamp(14px, 4cqi, 40px) 0;
 }
 .stage[data-view="question"] .brand-logo,
 .stage[data-view="result"]   .brand-logo {
-  width: clamp(88px, 22vw, 120px);
+  width: clamp(88px, 22cqi, 220px);
 }
 
 /* ===== Page container ===== */
@@ -164,7 +174,7 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: clamp(8px, 2vw, 16px) clamp(20px, 6vw, 36px) clamp(8px, 2vw, 12px);
+  padding: clamp(8px, 2cqi, 24px) clamp(20px, 6cqi, 70px) clamp(8px, 2cqi, 20px);
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(253, 61, 181, 0.45) transparent;
@@ -180,8 +190,8 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(8px, 2vw, 12px);
-  padding: clamp(10px, 2vw, 16px) clamp(20px, 6vw, 36px) clamp(18px, 4vw, 26px);
+  gap: clamp(8px, 2cqi, 18px);
+  padding: clamp(10px, 2cqi, 22px) clamp(20px, 6cqi, 70px) clamp(18px, 4cqi, 44px);
 }
 .progress {
   display: flex;
@@ -206,7 +216,7 @@ html, body {
   border: none;
   color: var(--ink-soft);
   font-family: var(--brand);
-  font-size: clamp(11px, 2.8vw, 13px);
+  font-size: clamp(11px, 2.8cqi, 22px);
   letter-spacing: 3px;
   text-transform: uppercase;
   cursor: pointer;
@@ -226,11 +236,11 @@ html, body {
   font-family: var(--serif);
   font-style: italic;
   font-weight: 500;
-  font-size: clamp(40px, 10vw, 64px);
+  font-size: clamp(40px, 10cqi, 120px);
   line-height: 1.05;
   text-align: center;
   color: var(--ink);
-  margin: clamp(2px, 1vw, 8px) auto 0;
+  margin: clamp(2px, 1cqi, 16px) auto 0;
   max-width: 14ch;
   letter-spacing: -0.5px;
 }
@@ -248,7 +258,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: clamp(12px, 3vw, 22px) auto clamp(8px, 2vw, 16px);
+  margin: clamp(12px, 3cqi, 40px) auto clamp(8px, 2cqi, 24px);
   width: 112%;
   max-width: none;
   margin-left: -6%;
@@ -274,7 +284,7 @@ html, body {
   z-index: 7;
   align-self: center;
   font-family: var(--brand);
-  font-size: clamp(10px, 2.6vw, 12px);
+  font-size: clamp(10px, 2.6cqi, 20px);
   letter-spacing: 5px;
   text-transform: uppercase;
   color: var(--magenta-deep);
@@ -283,7 +293,7 @@ html, body {
   border-radius: 999px;
   background: rgba(255, 251, 243, 0.7);
   backdrop-filter: blur(4px);
-  margin: clamp(10px, 2.5vw, 18px) auto clamp(14px, 3vw, 22px);
+  margin: clamp(10px, 2.5cqi, 28px) auto clamp(14px, 3cqi, 40px);
   animation: pulse 2.2s ease-in-out infinite;
   pointer-events: none;
 }
@@ -300,11 +310,11 @@ html, body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-top: clamp(6px, 2vw, 14px);
+  margin-top: clamp(6px, 2cqi, 22px);
 }
 .q-eyebrow {
   font-family: var(--brand);
-  font-size: clamp(10px, 2.6vw, 12px);
+  font-size: clamp(10px, 2.6cqi, 22px);
   letter-spacing: 4px;
   text-transform: uppercase;
   color: var(--magenta-deep);
@@ -313,13 +323,13 @@ html, body {
   font-family: var(--serif);
   font-style: italic;
   font-weight: 500;
-  font-size: clamp(96px, 26vw, 160px);
+  font-size: clamp(96px, 26cqi, 320px);
   line-height: 0.85;
   color: transparent;
   background: linear-gradient(180deg, var(--magenta) 0%, var(--magenta-deep) 100%);
   -webkit-background-clip: text;
           background-clip: text;
-  margin: clamp(2px, 1vw, 6px) 0;
+  margin: clamp(2px, 1cqi, 14px) 0;
   letter-spacing: -4px;
   position: relative;
 }
@@ -334,30 +344,30 @@ html, body {
 .q-tc {
   font-family: var(--tc);
   font-weight: 500;
-  font-size: clamp(22px, 5.6vw, 30px);
+  font-size: clamp(22px, 5.6cqi, 64px);
   color: var(--ink);
   letter-spacing: 6px;
-  margin-top: clamp(20px, 5vw, 30px);
+  margin-top: clamp(20px, 5cqi, 60px);
 }
 .q-en {
   font-family: var(--serif);
   font-style: italic;
   font-weight: 500;
-  font-size: clamp(15px, 3.8vw, 19px);
+  font-size: clamp(15px, 3.8cqi, 40px);
   color: var(--ink-soft);
-  margin-top: clamp(4px, 1vw, 8px);
+  margin-top: clamp(4px, 1cqi, 16px);
   letter-spacing: 0.3px;
 }
 
 .answers {
-  margin: clamp(18px, 5vw, 30px) auto 0;
+  margin: clamp(18px, 5cqi, 50px) auto 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(10px, 3vw, 14px);
+  gap: clamp(10px, 3cqi, 28px);
   width: 100%;
-  max-width: 460px;
+  max-width: min(86cqi, 900px);
 }
-.answers.cols-1 { grid-template-columns: 1fr; max-width: 320px; }
+.answers.cols-1 { grid-template-columns: 1fr; max-width: min(60cqi, 600px); }
 .answers.cols-4 { grid-template-columns: 1fr 1fr; }
 
 .answer {
@@ -366,8 +376,8 @@ html, body {
   background: var(--cream-soft);
   border: 1px solid rgba(31, 20, 25, 0.12);
   border-radius: 4px;
-  padding: clamp(18px, 4.5vw, 26px) clamp(10px, 2.8vw, 16px);
-  min-height: clamp(110px, 22vw, 140px);
+  padding: clamp(18px, 4.5cqi, 44px) clamp(10px, 2.8cqi, 28px);
+  min-height: clamp(110px, 22cqi, 240px);
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -398,7 +408,7 @@ html, body {
 .a-tc {
   font-family: var(--tc);
   font-weight: 500;
-  font-size: clamp(20px, 5vw, 26px);
+  font-size: clamp(20px, 5cqi, 56px);
   color: var(--ink);
   letter-spacing: 4px;
   line-height: 1.15;
@@ -407,7 +417,7 @@ html, body {
 .a-en {
   font-family: var(--serif);
   font-style: italic;
-  font-size: clamp(13px, 3.2vw, 16px);
+  font-size: clamp(13px, 3.2cqi, 32px);
   color: var(--ink-soft);
   line-height: 1.3;
 }
@@ -419,22 +429,22 @@ html, body {
 .r-eyebrow {
   text-align: center;
   font-family: var(--brand);
-  font-size: clamp(10px, 2.6vw, 12px);
+  font-size: clamp(10px, 2.6cqi, 22px);
   letter-spacing: 4px;
   text-transform: uppercase;
   color: var(--magenta-deep);
-  margin-top: clamp(6px, 2vw, 12px);
+  margin-top: clamp(6px, 2cqi, 20px);
 }
 .r-divider {
-  width: 28px; height: 1.5px;
+  width: clamp(28px, 4cqi, 56px); height: 1.5px;
   background: var(--magenta);
-  margin: clamp(8px, 2vw, 12px) auto;
+  margin: clamp(8px, 2cqi, 20px) auto;
 }
 .r-name {
   font-family: var(--serif);
   font-weight: 600;
   font-style: italic;
-  font-size: clamp(48px, 12vw, 80px);
+  font-size: clamp(48px, 12cqi, 160px);
   line-height: 1;
   text-align: center;
   letter-spacing: -1px;
@@ -448,20 +458,20 @@ html, body {
 .r-ing {
   text-align: center;
   font-family: var(--brand);
-  font-size: clamp(11px, 2.8vw, 13px);
+  font-size: clamp(11px, 2.8cqi, 24px);
   letter-spacing: 3px;
   color: var(--ink-soft);
   text-transform: uppercase;
-  margin-top: clamp(10px, 2.5vw, 16px);
+  margin-top: clamp(10px, 2.5cqi, 28px);
   max-width: 96%;
   margin-inline: auto;
 }
 
 .r-glass-wrap {
   position: relative;
-  margin: clamp(8px, 2.5vw, 18px) auto 0;
+  margin: clamp(8px, 2.5cqi, 28px) auto 0;
   width: 60%;
-  max-width: 230px;
+  max-width: min(60cqi, 480px);
   aspect-ratio: 3 / 4;
   display: flex;
   align-items: flex-end;
@@ -482,10 +492,10 @@ html, body {
 .r-note {
   font-family: var(--serif);
   font-style: italic;
-  font-size: clamp(15px, 3.8vw, 19px);
+  font-size: clamp(15px, 3.8cqi, 36px);
   color: var(--ink-soft);
   text-align: center;
-  margin: clamp(10px, 2.5vw, 16px) auto 0;
+  margin: clamp(10px, 2.5cqi, 28px) auto 0;
   max-width: 28ch;
   line-height: 1.45;
 }
@@ -496,14 +506,14 @@ html, body {
   background: transparent;
   color: var(--magenta-deep);
   font-family: var(--brand);
-  font-size: clamp(11px, 2.8vw, 13px);
+  font-size: clamp(11px, 2.8cqi, 24px);
   letter-spacing: 4px;
   text-transform: uppercase;
-  padding: 13px 30px;
+  padding: clamp(12px, 2cqi, 22px) clamp(28px, 6cqi, 60px);
   border-radius: 999px;
   cursor: pointer;
   align-self: center;
-  margin: clamp(14px, 3.5vw, 22px) auto clamp(4px, 1vw, 8px);
+  margin: clamp(14px, 3.5cqi, 40px) auto clamp(4px, 1cqi, 12px);
   transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
 }
 .r-cta:hover {
