@@ -64,8 +64,10 @@ html, body {
   container-name: stage;
 }
 
-/* Landscape viewport → centered portrait card */
-@media (min-aspect-ratio: 1/1) {
+/* Anything wider than a phone aspect (incl. iPad portrait + all landscape):
+   show a centered portrait card. Narrow-tall phones AND the 9:16 kiosk still
+   fill the viewport fully because their ratio is < 3/5. */
+@media (min-aspect-ratio: 3/5) {
   .stage {
     width: auto;
     height: min(98vh, 1180px);
