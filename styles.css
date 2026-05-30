@@ -283,6 +283,9 @@ body::before {
   color: transparent;
 }
 .landing-art {
+  appearance: none;
+  border: none;
+  background: transparent;
   flex: 1;
   display: flex;
   align-items: center;
@@ -293,21 +296,28 @@ body::before {
   margin-left: -6%;
   margin-right: -6%;
   padding: 0;
+  cursor: pointer;
+  transition: transform 0.25s ease, filter 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 .landing-art svg {
   width: 100%;
   height: auto;
   display: block;
   filter: drop-shadow(0 16px 32px rgba(253, 61, 181, 0.18));
+  transition: filter 0.25s ease;
+  pointer-events: none; /* clicks go to the button itself */
 }
-
-.landing-tap {
-  position: absolute; inset: 0;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  z-index: 6;
+.landing-art:hover,
+.landing-art:focus-visible {
+  transform: translateY(-4px);
+  outline: none;
 }
+.landing-art:hover svg,
+.landing-art:focus-visible svg {
+  filter: drop-shadow(0 22px 40px rgba(253, 61, 181, 0.32));
+}
+.landing-art:active { transform: translateY(-1px) scale(0.99); }
 .landing-hint {
   position: relative;
   z-index: 7;

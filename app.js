@@ -122,24 +122,22 @@ function svgEl(attrs, inner) {
 
 /* ====================== landing ====================== */
 function renderLanding() {
-  removeLandingTap();
   const start = () => { Object.keys(answers).forEach(k => delete answers[k]); history.length = 0; render("q1"); };
-  const tap = el("button", { class: "landing-tap", type: "button", "aria-label": "Begin the tasting", onclick: start });
-  tap.id = "landingTap";
-  stage.appendChild(tap);
 
   page.replaceChildren(
     el("h1", { class: "landing-title", html:
       'Discover your <em>signature sip</em><br/>for the evening.'
     }),
-    el("div", { class: "landing-art" }, landingArt()),
+    el("button", {
+      class: "landing-art",
+      type: "button",
+      "aria-label": "Begin the tasting",
+      onclick: start,
+    }, landingArt()),
   );
 }
 
-function removeLandingTap() {
-  const t = document.getElementById("landingTap");
-  if (t) t.remove();
-}
+function removeLandingTap() { /* no-op kept for callers */ }
 
 function landingArt() {
   // Fantasy line-art cocktail composition — twin glasses, botanicals, stars, citrus, swirls
