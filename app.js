@@ -22,7 +22,7 @@ const QUESTIONS = [
   },
   {
     id: "q3", num: "03", eyebrow: "Question Three",
-    tc: "Linklaters 一個字？", en: "Linklaters in one word?",
+    tc: "一個字形容Linklaters", en: "Linklaters in one word?",
     options: [
       { key: "resourceful", tc: "機智", en: "Resourceful" },
       { key: "creative",    tc: "創意", en: "Creative" },
