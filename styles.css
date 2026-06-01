@@ -461,6 +461,19 @@ body::before {
   letter-spacing: -0.1px;
   transition: color 0.22s ease;
 }
+/* Subtitle under the primary answer keyword (Q1 & Q2) */
+.a-sub {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(13px, 3.2cqi, 28px);
+  color: var(--ink-soft);
+  line-height: 1.25;
+  margin-top: clamp(2px, 0.8cqi, 8px);
+  letter-spacing: 0.2px;
+  opacity: 0.88;
+}
+
 /* Chinese answer: supporting */
 .a-tc {
   font-family: var(--tc);

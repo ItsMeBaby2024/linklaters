@@ -6,18 +6,18 @@ const QUESTIONS = [
     id: "q1", num: "01", eyebrow: "Question One",
     tc: "今晚的氛圍？", en: "What's your vibe tonight?",
     options: [
-      { key: "cocktail", tc: "雞尾酒", en: "Feeling festive — cocktail" },
-      { key: "mocktail", tc: "無酒精", en: "Keeping it cool — mocktail" },
+      { key: "cocktail", tc: "雞尾酒", en: "Cocktail", sub: "Feeling festive" },
+      { key: "mocktail", tc: "無酒精", en: "Mocktail", sub: "Keeping it cool" },
     ],
   },
   {
     id: "q2", num: "02", eyebrow: "Question Two",
     tc: "您屬於哪個元素？", en: "Which element represents you best?",
     options: [
-      { key: "earth", tc: "土", en: "Earth — grounded and steady" },
-      { key: "fire",  tc: "火", en: "Fire — bold and driven" },
-      { key: "air",   tc: "風", en: "Air — creative and adaptable" },
-      { key: "water", tc: "水", en: "Water — calm and flexible" },
+      { key: "earth", tc: "土", en: "Earth", sub: "Grounded and steady" },
+      { key: "fire",  tc: "火", en: "Fire",  sub: "Bold and driven" },
+      { key: "air",   tc: "風", en: "Air",   sub: "Creative and adaptable" },
+      { key: "water", tc: "水", en: "Water", sub: "Calm and flexible" },
     ],
   },
   {
@@ -294,13 +294,13 @@ function renderQuestion(q) {
 
   const grid = el("div", { class: "answers cols-" + q.options.length });
   q.options.forEach((opt) => {
+    const children = [el("div", { class: "a-en" }, opt.en)];
+    if (opt.sub) children.push(el("div", { class: "a-sub" }, opt.sub));
     grid.appendChild(
       el("button", {
         class: "answer", type: "button",
         onclick: () => handleAnswer(q.id, opt.key),
-      },
-        el("div", { class: "a-en" }, opt.en),
-      )
+      }, ...children)
     );
   });
 
