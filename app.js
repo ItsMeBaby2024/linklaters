@@ -299,8 +299,8 @@ function renderQuestion(q) {
         class: "answer", type: "button",
         onclick: () => handleAnswer(q.id, opt.key),
       },
-        el("div", { class: "a-tc" }, opt.tc),
         el("div", { class: "a-en" }, opt.en),
+        el("div", { class: "a-tc" }, opt.tc),
       )
     );
   });
@@ -309,8 +309,8 @@ function renderQuestion(q) {
     el("div", { class: "q-head" },
       el("div", { class: "q-eyebrow" }, q.eyebrow),
       el("div", { class: "q-num" }, q.num),
-      el("div", { class: "q-tc" }, q.tc),
       el("div", { class: "q-en" }, q.en),
+      el("div", { class: "q-tc" }, q.tc),
     ),
     grid,
   );
