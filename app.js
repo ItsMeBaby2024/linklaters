@@ -32,7 +32,7 @@ const QUESTIONS = [
   },
   {
     id: "q4", num: "04", eyebrow: "Question Four",
-    tc: "最有香港味的是？", en: "Which of these says Hong Kong best?",
+    tc: "最有香港味的是？", en: "Which of these says<br>Hong Kong best?",
     options: [
       { key: "milk_tea",      tc: "港式奶茶", en: "Hong Kong-style milk tea" },
       { key: "pineapple_bun", tc: "菠蘿包",   en: "Pineapple bun" },
@@ -46,14 +46,14 @@ const DRINKS = {
   cocktail: {
     fire:  { name: "Magenta",         ingredients: ["Gin", "Lemon Juice", "Butterfly Pea Flower Water", "Club Soda"], colors: ["#FDB6DE", "#FD3DB5", "#8C0E69"], garnish: "lemon_flower", note: "A sparkling citrus floral serve with a vivid magenta finish." },
     air:   { name: "Golden 50",       ingredients: ["Vodka", "Lemon", "Pineapple", "Syrup"],                          colors: ["#FCE9A8", "#E8B84A", "#A87822"], garnish: "pineapple",    note: "A radiant pineapple sipper — bright, golden, and celebratory." },
-    water: { name: "Harbour View",    ingredients: ["Vodka", "Blue Curaçao", "Lemon"],                                 colors: ["#BFE7FA", "#3FA3DC", "#1A4F8C"], garnish: "lemon",        note: "Cool, clear, and luminous — like the harbour at twilight." },
-    earth: { name: "Central Reserve", ingredients: ["Gin", "Lemon", "Cranberry", "Syrup"],                             colors: ["#F5C5C5", "#D24A6A", "#7A1B33"], garnish: "cranberry",    note: "Grounded, tart, and quietly confident — the city's heart in a glass." },
+    water: { name: "Victoria Blue",    ingredients: ["Vodka", "Blue Curaçao", "Lemon"],                                 colors: ["#BFE7FA", "#3FA3DC", "#1A4F8C"], garnish: "lemon",        note: "Cool, clear, and luminous — like the harbour at twilight." },
+    earth: { name: "Stanley Amber", ingredients: ["Gin", "Lemon", "Cranberry", "Syrup"],                             colors: ["#F5C5C5", "#D24A6A", "#7A1B33"], garnish: "cranberry",    note: "Grounded, tart, and quietly confident — the city's heart in a glass." },
   },
   mocktail: {
-    fire:  { name: "Lion Rock",      ingredients: ["Pineapple", "Lemon", "Club Soda"],                  colors: ["#FCE9A8", "#E8B84A", "#9E6A1F"], garnish: "pineapple",    note: "Bold and bright — a sun-kissed Hong Kong landmark in a glass." },
-    air:   { name: "Glowy",          ingredients: ["Lychee", "Lemon", "Club Soda"],                     colors: ["#FFFFFF", "#F8D7E6", "#E89BBE"], garnish: "lychee",       note: "Soft, airy, and lightly floral — gently glowing on the palate." },
-    water: { name: "Victoria Pulse", ingredients: ["Lemon Juice", "Butterfly Pea Flower Water", "Soda"], colors: ["#C9D6F2", "#5E7BD6", "#2A3F8F"], garnish: "lemon_flower", note: "Calm, blue, and shimmering — a slow pulse across the harbour." },
-    earth: { name: "Sunset Peak",    ingredients: ["Orange", "Grapefruit", "Club Soda"],                colors: ["#FFD7A8", "#F58A4B", "#B83B1F"], garnish: "orange",       note: "Warm citrus glow — grounded, generous, and sun-drenched." },
+    fire:  { name: "Lion Rock Gold",      ingredients: ["Pineapple", "Lemon", "Club Soda"],                  colors: ["#FCE9A8", "#E8B84A", "#9E6A1F"], garnish: "pineapple",    note: "Bold and bright — a sun-kissed Hong Kong landmark in a glass." },
+    air:   { name: "Bauhinia Blush",          ingredients: ["Lychee", "Lemon", "Club Soda"],                     colors: ["#FFFFFF", "#F8D7E6", "#E89BBE"], garnish: "lychee",       note: "Soft, airy, and lightly floral — gently glowing on the palate." },
+    water: { name: "Star Ferry Glow", ingredients: ["Lemon Juice", "Butterfly Pea Flower Water", "Soda"], colors: ["#C9D6F2", "#5E7BD6", "#2A3F8F"], garnish: "lemon_flower", note: "Calm, blue, and shimmering — a slow pulse across the harbour." },
+    earth: { name: "Peak Sunset",    ingredients: ["Orange", "Grapefruit", "Club Soda"],                colors: ["#FFD7A8", "#F58A4B", "#B83B1F"], garnish: "orange",       note: "Warm citrus glow — grounded, generous, and sun-drenched." },
   },
 };
 
@@ -308,7 +308,7 @@ function renderQuestion(q) {
     el("div", { class: "q-head" },
       el("div", { class: "q-eyebrow" }, q.eyebrow),
       el("div", { class: "q-num" }, q.num),
-      el("div", { class: "q-en" }, q.en),
+      el("div", { class: "q-en", html: q.en }),
     ),
     grid,
   );
